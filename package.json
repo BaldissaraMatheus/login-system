@@ -1,0 +1,19 @@
+{
+  "name": "login-system",
+  "version": "1.0.0",
+  "description": "Cadastra e faz login de usuários e mostra conteúdo para o usuário logado",
+  "main": "",
+  "scripts": {},
+  "author": "Matheus Baldissara",
+  "license": "ISC",
+  "devDependencies": {
+    "gulp": "^3.9.1",
+    "gulp-image": "^4.3.0",
+    "gulp-sass": "^3.2.1"
+  },
+  "dependencies": {
+    "bootstrap": "^4.0.0",
+    "jquery": "^3.3.1",
+    "popper.js": "^1.14.1"
+  }
+}
