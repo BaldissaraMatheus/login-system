@@ -14,7 +14,7 @@
       <h2>Cadastre-se</h2>
     </div>
 
-    <form>
+    <form action='includes/signup.inc.php' method='POST'>
       <div class='row'>
         <div class='col-sm'>
           <div class='form-group'>
@@ -43,7 +43,7 @@
         <div class='col'>
           <div class='form-group'>
             <label for='usernameInput'>Nome de usuário</label>
-            <input type='email' name='username' class='form-control' placeholder='Nome de usuário'>
+            <input type='text' name='username' class='form-control' placeholder='Nome de usuário'>
           </div>
         </div>
       </div>
@@ -59,7 +59,7 @@
       
       <div class='row pb-4'>
         <div class='col'>
-        <button type='submit' name='signup' class='btn btn-primary'>Cadastrar</button>
+        <button type='submit' name='submit' class='btn btn-primary'>Cadastrar</button>
         </div>
       </div>    
 

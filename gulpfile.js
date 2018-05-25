@@ -18,6 +18,11 @@ gulp.task('php', () =>{
     .pipe(gulp.dest('public'));
 });
 
+gulp.task('includes', () =>{
+  return gulp.src(['src/includes/*.php'])
+    .pipe(gulp.dest('public/includes'));
+});
+
 gulp.task('image', () =>{
   return gulp.src(['src/assets/*.png', 'src/assets/*.jpg', 'src/assets/*.svg'])
     .pipe(minify())
@@ -29,6 +34,7 @@ gulp.task('serve', ['sass'], () => {
   gulp.watch(['src/js/*.js'], ['js']);
   gulp.watch(['src/js/*'], ['image']);
   gulp.watch(['src/*.php'], ['php']);
+  gulp.watch(['src/includes/*.php'], ['includes']);
 });
 
-gulp.task('default', ['sass', 'js', 'php', 'image', 'serve']);
+gulp.task('default', ['sass', 'js', 'php', 'includes','image', 'serve']);
