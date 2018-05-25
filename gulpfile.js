@@ -14,7 +14,7 @@ gulp.task('sass', () => {
 });
 
 gulp.task('php', () =>{
-  return gulp.src(['src/index.php'])
+  return gulp.src(['src/*.php'])
     .pipe(gulp.dest('public'));
 });
 
