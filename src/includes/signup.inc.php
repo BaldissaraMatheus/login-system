@@ -3,13 +3,12 @@
   if (isset($_POST['submit'])) {
 
     include_once 'dbh.inc.php';
-
-    $firstName = mysqli_real_scape_string($conn, $_POST['firstName']);
-    $lastName = mysqli_real_scape_string($conn, $_POST['lastName']);
-    $email = mysqli_real_scape_string($conn, $_POST['email']);
-    $username = mysqli_real_scape_string($conn, $_POST['username']);
-    $pw = mysqli_real_scape_string($conn, $_POST['pw']);
-
+    $firstName = $_POST['firstName'];
+    $lastName = $_POST['lastName'];
+    $username = $_POST['username'];
+    $email = $_POST['email'];
+    $pw = $_POST['pw'];
+    
     if (empty($firstName) || empty($lastName) || empty($email) || empty($username) || empty($pw)) {
       header("Location: ../signup.php?signup=empty");
       exit();
@@ -25,7 +24,7 @@
           exit();
         } else {
           $sql = "SELECT * FROM users WHERE id ='$username'";
-          $result = mysql_query($conn, $sql);
+          $result = mysqli_query($conn, $sql);
           $resultCheck = mysqli_num_rows($result);
 
           if ($resultCheck > 0) {
@@ -34,6 +33,7 @@
           } else {
             $hashedPw = password_hash($pw, PASSWORD_DEFAULT);
             $sql = "INSERT INTO users (firstName, lastName, email, username, pw) VALUES ('$firstName', '$lastName', '$email', '$username', '$hashedPw');";
+            
             mysqli_query($conn, $sql);
             header("Location: ../signup.php?signup=success");
           }

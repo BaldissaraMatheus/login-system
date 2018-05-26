@@ -1,8 +1,8 @@
 <?php
 
 $dbSeverName = "localhost";
-$dbusername = "root";
+$dbUsername = "root";
 $dbPassword = "";
 $dbName = "loginsystem";
 
-$conn = mysqli_connect($dbSeverName, $dbusername, $dbPassword, $dbName);
+$conn = mysqli_connect($dbSeverName, $dbUsername, $dbPassword, $dbName);

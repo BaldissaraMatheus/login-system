@@ -3,27 +3,28 @@
 session_start();
 
 if (isset($_POST['submit'])) {
-  
   include 'dbh.inc.php';
-  $username = mysqli_real_escape_string($conn, $_POST['username']);
-  $pw = mysqli_real_escape_string($conn, $_POST['pw']);
+  $username = $_POST['username'];
+  $email = $_POST['email'];
+  $pw = $_POST['pw'];
 
-  if (empty($username) || empty($pw)) {
+  if (empty($username) || empty($pw)) {  
     header("Location: ../index.php?login=empty");
     exit();
   } else {
+    
     $sql = "SELECT * FROM users WHERE username = '$username' OR username = '$email'";
     $result = mysqli_query($conn, $sql);
-    $resultCheck = mysql_num_rows($result);
+    $resultCheck = mysqli_num_rows($result);
 
-    if($resultCheck < 1) {
-      header("Location: ../index.php?login=error");
+    if($resultCheck<=0) {
+      header("Location: ../index.php?usuario-nao-encontrado");
       exit();
     } else {
       if ($row = mysqli_fetch_assoc($result)) {
-        $hashedPwCheck = password_verify($pw, $row['password']);
+        $hashedPwCheck = password_verify($pw, $row['pw']);
         if ($hashedPwCheck == false) {
-          header("Location: ../index.php?login=error");
+          header("Location: ../index.php?login=errorpw");
           exit();
           // Verifica se retorna verdadeiro pelo risco de retornar um valor não buleano
         } else if ($hashedPwCheck == true) {
