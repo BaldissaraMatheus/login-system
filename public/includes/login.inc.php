@@ -9,7 +9,7 @@ if (isset($_POST['submit'])) {
   $pw = $_POST['pw'];
 
   if (empty($username) || empty($pw)) {  
-    header("Location: ../index.php?login=empty");
+    header("Location: ../index.php?login=err-vazio");
     exit();
   } else {
     
@@ -24,7 +24,7 @@ if (isset($_POST['submit'])) {
     $resultCheck = mysqli_num_rows($result);
 
     if($resultCheck<=0) {
-      header("Location: ../index.php?usuario-nao-encontrado");
+      header("Location: ../index.php?login=err-usuario-nao-encontrado");
       exit();
 
     } else {
@@ -32,7 +32,7 @@ if (isset($_POST['submit'])) {
         $hashedPwCheck = password_verify($pw, $row['pw']);
 
         if ($hashedPwCheck == false) {
-          header("Location: ../index.php?login=senha-incorreta");
+          header("Location: ../index.php?login=err-senha-incorreta");
           exit();
 
           // Verifica se retorna verdadeiro pelo risco de retornar um valor não buleano
@@ -42,7 +42,7 @@ if (isset($_POST['submit'])) {
           $_SESSION['lastName'] = $row[lastName];
           $_SESSION['email'] = $row[email];
           $_SESSION['username'] = $row[username];
-          header("Location: ../index.php?login=success");
+          header("Location: ../index.php?login=success");          
           exit();
         }
       }

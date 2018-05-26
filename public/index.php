@@ -7,12 +7,13 @@
 
 <body>
   <div class='container'>
-    <?php
+    <?php      
       include_once 'header.php';
+      include_once 'message.php';
     ?>
 
     <main class='jumbotron'>
-      <h1 class='display-4'>Bem vindo, <?php if(isset($_SESSION['id'])) { echo $_SESSION['username']; } else { echo 'visitante'; } ?> </h1>
+      <h1 class='display-4'>Bem vindo, <?php if(isset($_SESSION['id'])) { echo $_SESSION['username']; } else { echo 'visitante'; } ?>!</h1>
       <p class='lead'>
       <?php
         if (isset($_SESSION['id'])) {
