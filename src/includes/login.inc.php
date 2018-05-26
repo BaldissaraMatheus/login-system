@@ -13,19 +13,28 @@ if (isset($_POST['submit'])) {
     exit();
   } else {
     
-    $sql = "SELECT * FROM users WHERE username = '$username' OR username = '$email'";
-    $result = mysqli_query($conn, $sql);
+    $sql = "SELECT * FROM users WHERE username = ?;";
+    $stmt = mysqli_stmt_init($conn);
+    if(mysqli_stmt_prepare($stmt, $sql)) {
+      mysqli_stmt_bind_param($stmt, "s", $username);
+      mysqli_stmt_execute($stmt);
+      $result = mysqli_stmt_get_result($stmt);
+    }
+
     $resultCheck = mysqli_num_rows($result);
 
     if($resultCheck<=0) {
       header("Location: ../index.php?usuario-nao-encontrado");
       exit();
+
     } else {
       if ($row = mysqli_fetch_assoc($result)) {
         $hashedPwCheck = password_verify($pw, $row['pw']);
+
         if ($hashedPwCheck == false) {
-          header("Location: ../index.php?login=errorpw");
+          header("Location: ../index.php?login=senha-incorreta");
           exit();
+
           // Verifica se retorna verdadeiro pelo risco de retornar um valor não buleano
         } else if ($hashedPwCheck == true) {
           $_SESSION['id'] = $row[id];

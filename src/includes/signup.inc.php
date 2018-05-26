@@ -1,8 +1,8 @@
 <?php
 
   if (isset($_POST['submit'])) {
-
     include_once 'dbh.inc.php';
+
     $firstName = $_POST['firstName'];
     $lastName = $_POST['lastName'];
     $username = $_POST['username'];
@@ -28,20 +28,23 @@
           $resultCheck = mysqli_num_rows($result);
 
           if ($resultCheck > 0) {
-            header("Location: ../signup.php?signup=user-taken");
+            header("Location: ../signup.php?signup=nome-de-usuario-ja-utilizado");
             exit();            
           } else {
             $hashedPw = password_hash($pw, PASSWORD_DEFAULT);
-            $sql = "INSERT INTO users (firstName, lastName, email, username, pw) VALUES ('$firstName', '$lastName', '$email', '$username', '$hashedPw');";
-            
-            mysqli_query($conn, $sql);
-            header("Location: ../signup.php?signup=success");
-          }
+            $sql = "INSERT INTO users (firstName, lastName, email, username, pw) VALUES (?, ?, ?, ?, ?);";
+            $stmt = mysqli_stmt_init($conn);
 
+            if (mysqli_stmt_prepare($stmt, $sql)) {
+              mysqli_stmt_bind_param($stmt, 'sssss', $firstName, $lastName, $email, $username, $hashedPw);
+              mysqli_stmt_execute($stmt);
+
+              header("Location: ../index.php?signup=success");
+            }         
+          }
         }
       }
     }
-
   } else {
     header("Location: ../signup.php");
     exit();
