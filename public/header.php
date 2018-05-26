@@ -1,6 +1,6 @@
 <header>
       <nav class='navbar navbar-expand-lg navbar-dark bg-dark'>
-        <a href='/' class='navbar-brand'>Cachorro Fumaca</a>
+        <a href='/' class='navbar-brand'>Cachorro-salsicha</a>
         <button class='navbar-toggler' type='button' data-toggle='collapse' data-target='#navbarSupportedContent'>
           <span class='navbar-toggler-icon'></span>
         </button>
